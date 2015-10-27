@@ -1,0 +1,9 @@
+{
+  "checks": {
+    "disk-data": {
+      "command": "/etc/sensu/plugins/check_disk -p /data -w 85 -c 90",
+      "subscribers": ["jma"],
+      "interval": 60
+    }
+  }
+}

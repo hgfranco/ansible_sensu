@@ -1,0 +1,10 @@
+---
+gem_exe: "/opt/sensu/embedded/bin/gem"
+
+ruby_gems: 
+     - sensu-plugin
+     - sys-filesystem
+     - mail
+     - timeout
+     - mime-types
+     

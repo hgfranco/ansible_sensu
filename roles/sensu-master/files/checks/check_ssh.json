@@ -1,0 +1,9 @@
+{
+  "checks": {
+    "ssh": {
+      "command": "/etc/sensu/plugins/check-procs.rb -p ssh -W 1",
+      "subscribers": ["all"],
+      "interval": 60
+    }
+  }
+}

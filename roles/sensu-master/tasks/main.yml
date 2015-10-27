@@ -1,0 +1,47 @@
+---
+- include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: Set Sensu to use embedded ruby
+  copy: src=sensu_default dest=/etc/default/sensu
+
+- name: Create SSL directory
+  file: path=/etc/sensu/ssl state=directory
+
+- name: Copy SSL certs
+  copy: "src={{ item }} dest=/etc/sensu/ssl"
+  with_items:
+    - cacert.pem
+    - cert.pem
+    - key.pem
+  notify: restart sensu
+
+- name: Create configuration file for Sensu
+  template: src=sensu_config.json.j2 dest=/etc/sensu/config.json
+  notify: restart sensu
+
+- name: Copy over mail handler
+  copy: src=handler-mailer.rb dest=/etc/sensu/handlers/handler-mailer.jb
+
+- name: Create handler_config directory
+  file: path=/etc/sensu/conf.d/handler_config state=directory
+  notify: restart sensu
+
+- name: Copy over handler_mailer
+  copy: src=handler_mailer.json dest=/etc/sensu/conf.d/handler_config
+  notify: restart sensu
+
+- name: Copy over JSON check files
+  copy: src=checks/ dest=/etc/sensu/conf.d
+  notify: restart sensu
+
+- name: Create configuration file for mailer.json
+  template: src=mailer.json.j2 dest=/etc/sensu/conf.d/handler_config/mailer.json
+  notify: restart sensu
+
+- name: Start sensu
+  service: name={{ item }} state=started enabled=yes
+  with_items:
+    - sensu-api
+    - sensu-server
+

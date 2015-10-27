@@ -1,0 +1,11 @@
+---
+- include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: Manage gems
+  gem: name={{ item }}
+    executable="{{ gem_exe | default(None) }}"
+    state={{ item.state | default('present') }}
+    version={{ item.version | default('') }}
+  with_items: ruby_gems
+

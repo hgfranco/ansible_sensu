@@ -1,0 +1,9 @@
+{
+  "checks": {
+    "cpu": {
+      "command": "/etc/sensu/plugins/check-cpu.sh 50 40",
+      "subscribers": ["all"],
+      "interval": 60
+    }
+  }
+}

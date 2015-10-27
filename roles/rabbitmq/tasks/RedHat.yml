@@ -1,0 +1,9 @@
+---
+- name: Update OpenSSl
+  yum: name=openssl state=present
+
+- name: Install Erlang
+  yum: name=erlang state=present
+
+- name: Install RabbitMQ
+  yum: name=rabbitmq-server state=present

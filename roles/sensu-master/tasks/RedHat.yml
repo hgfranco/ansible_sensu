@@ -1,0 +1,6 @@
+---
+- name: Install Sensu Core
+  yum: name=sensu state=present update_cache=yes
+
+- name: Install the 'Development tools' package group
+  yum: name="@Development tools" state=present

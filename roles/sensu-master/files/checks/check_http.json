@@ -1,0 +1,9 @@
+{
+  "checks": {
+    "http": {
+      "command": "/etc/sensu/plugins/check-http.rb",
+      "subscribers": ["jma"],
+      "interval": 60
+    }
+  }
+}

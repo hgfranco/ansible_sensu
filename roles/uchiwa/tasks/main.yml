@@ -1,0 +1,7 @@
+---
+- include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: Create configuration file for uchiwa
+  copy: src=uchiwa.json dest=/etc/sensu/uchiwa.json mode=0644 group=uchiwa owner=uchiwa
+  notify: restart uchiwa

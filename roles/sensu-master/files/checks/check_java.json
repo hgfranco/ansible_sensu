@@ -1,0 +1,9 @@
+{
+  "checks": {
+    "java": {
+      "command": "/etc/sensu/plugins/check-procs.rb -p java -W 1",
+      "subscribers": ["jma"],
+      "interval": 60
+    }
+  }
+}

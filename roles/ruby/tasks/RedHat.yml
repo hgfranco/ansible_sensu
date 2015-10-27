@@ -1,0 +1,3 @@
+---
+- name: Ensure ruby is installed
+  yum: pkg={{ ruby_version }} state=present

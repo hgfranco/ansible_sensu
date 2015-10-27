@@ -1,0 +1,28 @@
+---
+- include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: Create SSL directory for RabbitMQ
+  file: path=/etc/rabbitmq/ssl state=directory
+
+- name: Install SSL certs
+  copy: "src={{ item }} dest=/etc/rabbitmq/ssl"
+  notify: restart rabbitmq
+  with_items:
+     - key.pem
+     - cacert.pem
+     - cert.pem
+
+- name: Setup RabbitMQ config file
+  copy: src=rabbitmq.config dest=/etc/rabbitmq
+  notify: restart rabbitmq
+
+- name: Start RabbitMQ
+  service: name=rabbitmq-server state=started
+
+- name: Create vhost for RabbitMQ
+  command: "rabbitmqctl add_vhost {{ rabbitmq_vhost }}"
+  ignore_errors: yes
+
+- name: Add user to RabbitMQ
+  rabbitmq_user: "state=present user={{ rabbitmq_user }} password={{ rabbitmq_password }} vhost={{ rabbitmq_vhost }} configure_priv=.* read_priv=.* write_priv=.*"

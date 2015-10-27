@@ -1,0 +1,25 @@
+{
+  "rabbitmq": {
+    "host": "{{ sensu_master_host }}",
+    "vhost": "{{ sensu_rabbitmq_vhost }}",
+    "user": "{{ sensu_user }}",
+    "password": "{{ sensu_password }}"
+  },
+  "redis": {
+    "host": "{{ sensu_master_host }}"
+  },
+  "api": {
+    "host": "{{ sensu_master_host }}",
+    "port": 4567
+  }, 
+  "dashboard": {
+    "host": "{{ sensu_master_host}}",
+    "port": 8080
+  },
+  "handlers": {
+    "default": {
+    "type": "pipe",
+    "command": "true"
+   }
+  }
+}

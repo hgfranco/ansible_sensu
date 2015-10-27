@@ -1,0 +1,16 @@
+---
+
+#sensu_config.json.j2 defautls
+sensu_master_host: "localhost"
+sensu_rabbitmq_vhost: "/sensu"
+sensu_user: "sensu"
+sensu_password: "PASSWORD_HERE"
+
+#mailer.json defaults
+sensu_admin_gui: "http://sensu.myurl.com :3000"
+sensu_mail_from: "sensu@myurl.com"
+sensu_mail_to: "ops@myurl.com"
+sensu_smtp_address: "localhost"
+sensu_smtp_port: "25"
+sensu_smtp_domain: "myurl.com"
+
